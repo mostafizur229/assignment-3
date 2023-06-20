@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX POST Request Example</title>
+  <script>
+    function sendPostRequest() {
+      var xhr = new XMLHttpRequest();
+      var url = "https://api.example.com/submit";
+      var data = {
+        name: "John Doe",
+        email: "johndoe@example.com"
+      };
+      var jsonData = JSON.stringify(data);
+      
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = xhr.responseText;
+          console.log(response); // Handle the response data here
+        }
+      };
+      
+      xhr.send(jsonData);
+    }
+  </script>
+</head>
+<body>
+  <h1>AJAX POST Request Example</h1>
+  <button onclick="sendPostRequest()">Send POST Request</button>
+</body>
+</html>

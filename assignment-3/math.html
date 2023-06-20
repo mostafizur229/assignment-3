@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Square Root of Sum of Squares</title>
+  <script>
+    function calculateSquareRootOfSumOfSquares(numbers) {
+      var sumOfSquares = 0;
+      for (var i = 0; i < numbers.length; i++) {
+        sumOfSquares += Math.pow(numbers[i], 2);
+      }
+      var squareRoot = Math.sqrt(sumOfSquares);
+      return squareRoot;
+    }
+    
+    function displaySquareRootOfSumOfSquares() {
+      var numbers = [3, 4, 5, 6, 7]; // Example array of numbers
+      var result = calculateSquareRootOfSumOfSquares(numbers);
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+</head>
+<body>
+  <h1>Square Root of Sum of Squares</h1>
+  <p>Click the button to calculate the square root of the sum of squares for an array of numbers:</p>
+  <button onclick="displaySquareRootOfSumOfSquares()">Calculate</button>
+  <h2>Result:</h2>
+  <div id="result"></div>
+</body>
+</html>

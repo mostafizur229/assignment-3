@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var nameInput = document.getElementById('name');
+      var emailInput = document.getElementById('email');
+      var passwordInput = document.getElementById('password');
+      var confirmPasswordInput = document.getElementById('confirm-password');
+      
+      var name = nameInput.value.trim();
+      var email = emailInput.value.trim();
+      var password = passwordInput.value;
+      var confirmPassword = confirmPasswordInput.value;
+      
+      var errorMessages = [];
+      
+      if (name === '') {
+        errorMessages.push('Name is required.');
+      } else if (!/^[a-zA-Z]+$/.test(name)) {
+        errorMessages.push('Name should contain only letters.');
+      }
+      
+      if (email === '') {
+        errorMessages.push('Email is required.');
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        errorMessages.push('Email should be a valid email address.');
+      }
+      
+      if (password === '') {
+        errorMessages.push('Password is required.');
+      } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}/.test(password)) {
+        errorMessages.push('Password should have a minimum length of 8 characters and contain at least one uppercase letter, one lowercase letter, and one digit.');
+      }
+      
+      if (confirmPassword === '') {
+        errorMessages.push('Confirm Password is required.');
+      } else if (confirmPassword !== password) {
+        errorMessages.push('Confirm Password should match the Password field.');
+      }
+      
+      var errorContainer = document.getElementById('error-container');
+      
+      if (errorMessages.length > 0) {
+        var errorMessage = errorMessages.join('<br>');
+        errorContainer.innerHTML = '<div class="error">' + errorMessage + '</div>';
+        return false;
+      }
+      
+      errorContainer.innerHTML = '';
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    
+    <label for="confirm-password">Confirm Password:</label>
+    <input type="password" id="confirm-password" name="confirm-password" required><br><br>
+    
+    <input type="submit" value="Submit">
+    
+    <div id="error-container"></div>
+  </form>
+</body>
+</html>

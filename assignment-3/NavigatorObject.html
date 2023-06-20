@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Browser Detector</title>
+  <script>
+    function detectBrowser() {
+      var browserName = '';
+      var browserVersion = '';
+      var userAgent = navigator.userAgent;
+      
+      if (userAgent.indexOf('Chrome') > -1) {
+        browserName = 'Google Chrome';
+        browserVersion = userAgent.match(/Chrome\/(\d+)/)[1];
+      } else if (userAgent.indexOf('Safari') > -1) {
+        browserName = 'Safari';
+        browserVersion = userAgent.match(/Version\/(\d+)/)[1];
+      } else if (userAgent.indexOf('Firefox') > -1) {
+        browserName = 'Mozilla Firefox';
+        browserVersion = userAgent.match(/Firefox\/(\d+)/)[1];
+      } else if (userAgent.indexOf('Edge') > -1) {
+        browserName = 'Microsoft Edge';
+        browserVersion = userAgent.match(/Edge\/(\d+)/)[1];
+      } else if (userAgent.indexOf('Opera') > -1 || userAgent.indexOf('OPR') > -1) {
+        browserName = 'Opera';
+        browserVersion = userAgent.match(/(?:Opera|OPR)\/(\d+)/)[1];
+      } else if (userAgent.indexOf('Trident') > -1) {
+        browserName = 'Internet Explorer';
+        var rvIndex = userAgent.indexOf('rv:');
+        browserVersion = userAgent.substring(rvIndex + 3, userAgent.indexOf('.', rvIndex));
+      } else {
+        browserName = 'Unknown Browser';
+      }
+      
+      return {
+        name: browserName,
+        version: browserVersion
+      };
+    }
+    
+    function displayBrowserInfo() {
+      var browserInfo = detectBrowser();
+      var result = 'Browser: ' + browserInfo.name + '<br>' + 'Version: ' + browserInfo.version;
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+</head>
+<body>
+  <h1>Browser Detector</h1>
+  <p>Click the button to detect the user's browser name and version:</p>
+  <button onclick="displayBrowserInfo()">Detect Browser</button>
+  <h2>Result:</h2>
+  <div id="result"></div>
+</body>
+</html>
